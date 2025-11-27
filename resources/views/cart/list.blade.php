@@ -8,13 +8,13 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active"><i class="bx bx-cart"></i> Shopping Cart</li>
+                        <li class="breadcrumb-item active">
+                            <i class="bx bx-cart"></i> Shopping Cart
+                        </li>
                     </ol>
                 </div>
-
             </div>
         </div>
     </div>
@@ -52,10 +52,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->product_name }}</td>
-                                    <td><img src="{{ asset($item->product_image) }}" width="60" height="60"></td>
-                                    <td>₹{{ $item->price }}</td>
+                                    <td>
+                                        <img src="{{ asset($item->product_image) }}" width="60" height="60" alt="Product Image">
+                                    </td>
+                                    <td>₹{{ number_format($item->price, 2) }}</td>
                                     <td>{{ $item->quantity }}</td>
-                                    <td>₹{{ $item->price * $item->quantity }}</td>
+                                    <td>₹{{ number_format($item->price * $item->quantity, 2) }}</td>
 
                                     <td>
                                         <!-- Edit button -->
@@ -64,10 +66,12 @@
                                         </a>
 
                                         <!-- Delete button -->
-                                        <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to remove this item?')">
+                                            <button type="submit"
+                                                class="btn btn-outline-danger"
+                                                onclick="return confirm('Are you sure you want to remove this item?')">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
@@ -75,8 +79,19 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
+                    </div>
+                </div>
+
+                <!-- Back Button -->
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="mt-4">
+                            <a href="{{ route('cart.index') }}" class="btn btn-primary waves-effect waves-light">
+                                <i class="bx bx-left-arrow-alt font-size-16 align-middle me-2"></i>
+                                Back to Home
+                            </a>
+                        </div>
                     </div>
                 </div>
 
