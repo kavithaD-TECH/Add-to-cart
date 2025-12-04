@@ -60,6 +60,19 @@
 </li>
 
         <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-search"></i></a></li>
+
+        
+    {{-- LOGOUT BUTTON --}}
+    @auth
+    <li class="nav-item">
+        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-outline-danger btn-sm ms-3">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+        </form>
+    </li>
+    @endauth
       </ul>
     </div>
   </div>
